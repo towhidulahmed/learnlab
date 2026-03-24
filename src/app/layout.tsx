@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="mx-auto min-h-screen max-w-7xl px-3 py-4 sm:px-6 sm:py-6">
-          <header className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-800 bg-zinc-900/70 px-3 py-3 sm:mb-8 sm:px-4">
+          <header className="mb-5 hidden flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-800 bg-zinc-900/70 px-3 py-3 sm:mb-8 sm:flex sm:px-4">
             <div>
               <h1 className="text-lg font-semibold sm:text-xl">Security+ SY0-701 Prep</h1>
               <p className="text-xs text-zinc-400 sm:text-sm">Mock tests and study guide</p>

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { buildExamForTest, evaluateExam, QuestionPayload } from "@/lib/exam";
 import { EXAM_DURATION_SECONDS } from "@/lib/constants";
 import { saveAttempt } from "@/lib/client-storage";
@@ -31,6 +32,8 @@ export function ExamRunner({ testId }: { testId: number }) {
   const [startedAt, setStartedAt] = useState<string>(new Date().toISOString());
   const [submitting, setSubmitting] = useState(false);
   const [reviewMode, setReviewMode] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileScenarioOpen, setMobileScenarioOpen] = useState(false);
 
   useEffect(() => {
     const load = () => {
@@ -71,16 +74,44 @@ export function ExamRunner({ testId }: { testId: number }) {
 
   const answeredCount = useMemo(() => Object.keys(answers).filter((key) => answers[Number(key)]?.length > 0).length, [answers]);
 
+  useEffect(() => {
+    setMobileScenarioOpen(false);
+  }, [index]);
+
+  const requiredSelections = (question: QuestionPayload) => (question.type === "multiple-choice-multiple" ? 3 : 1);
+
   const toggleOption = (questionId: number, option: string, multi: boolean) => {
+    if (!exam) {
+      return;
+    }
+
+    const question = exam.questions.find((entry) => entry.id === questionId);
+    if (!question) {
+      return;
+    }
+
     setAnswers((prev) => {
       const existing = prev[questionId] || [];
+      let nextSelection: string[] = [];
+
       if (!multi) {
-        return { ...prev, [questionId]: [option] };
+        nextSelection = [option];
+      } else if (existing.includes(option)) {
+        nextSelection = existing.filter((entry) => entry !== option);
+      } else {
+        nextSelection = [...existing, option];
       }
-      if (existing.includes(option)) {
-        return { ...prev, [questionId]: existing.filter((entry) => entry !== option) };
+
+      const nextState = { ...prev, [questionId]: nextSelection };
+
+      const shouldAutoNext = nextSelection.length >= requiredSelections(question);
+      if (shouldAutoNext && index < exam.questions.length - 1) {
+        window.setTimeout(() => {
+          setIndex((prevIndex) => Math.min(exam.questions.length - 1, prevIndex + 1));
+        }, 160);
       }
-      return { ...prev, [questionId]: [...existing, option] };
+
+      return nextState;
     });
   };
 
@@ -113,29 +144,64 @@ export function ExamRunner({ testId }: { testId: number }) {
 
   return (
     <div className="space-y-4">
-      <div className="sticky top-2 z-10 rounded-xl border border-zinc-700 bg-zinc-900 p-3 sm:top-4 sm:p-4">
-        <div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3">
-          <div>
+      <div className="sticky top-0 z-20 rounded-xl border border-zinc-700 bg-zinc-900 p-2.5 sm:top-4 sm:p-4">
+        <div className="flex items-center justify-between gap-2 sm:flex-wrap sm:gap-3">
+          <div className="flex items-center gap-2 sm:hidden">
+            <button
+              type="button"
+              aria-label="Open menu"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              className="rounded-md border border-zinc-600 bg-zinc-800 px-2.5 py-1.5 text-sm"
+            >
+              ☰
+            </button>
+            <p className="text-xs font-semibold text-zinc-200">Mock {exam.testNumber} • Q {index + 1}/{exam.questions.length}</p>
+          </div>
+          <div className="hidden sm:block">
             <h2 className="text-base font-semibold sm:text-lg">Mock Test {exam.testNumber}</h2>
             <p className="text-xs text-zinc-400 sm:text-sm">
               Question {index + 1} of {exam.questions.length} • Answered {answeredCount}
             </p>
           </div>
-          <div className="rounded-md border border-amber-500 bg-amber-950/40 px-3 py-1.5 text-xl font-bold text-amber-300 sm:px-4 sm:py-2 sm:text-2xl">
+          <div className="rounded-md border border-amber-500 bg-amber-950/40 px-2.5 py-1 text-lg font-bold text-amber-300 sm:px-4 sm:py-2 sm:text-2xl">
             {formatTime(timeLeft)}
           </div>
         </div>
+
+        {mobileMenuOpen ? (
+          <div className="mt-2 grid gap-2 sm:hidden">
+            <Link onClick={() => setMobileMenuOpen(false)} href="/" className="rounded-md bg-zinc-800 px-3 py-2 text-sm">
+              Home
+            </Link>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/study" className="rounded-md bg-zinc-800 px-3 py-2 text-sm">
+              Study
+            </Link>
+          </div>
+        ) : null}
       </div>
 
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-3 sm:p-4">
-        <div className="mb-3 flex flex-col gap-2 text-xs sm:flex-row sm:items-center sm:justify-between sm:text-sm">
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-2.5 sm:p-4">
+        <div className="mb-2 flex flex-col gap-1 text-[11px] sm:mb-3 sm:flex-row sm:items-center sm:justify-between sm:text-sm">
           <span className="w-fit rounded-md bg-zinc-800 px-2 py-1">{currentQuestion.type}</span>
           <span className="text-zinc-400">Difficulty: {currentQuestion.difficulty}</span>
         </div>
-        {currentQuestion.scenario ? <p className="mb-3 rounded-md bg-zinc-800 p-3 text-sm leading-6">{currentQuestion.scenario}</p> : null}
-        <p className="text-sm font-medium leading-6 sm:text-base">{currentQuestion.qid}: {currentQuestion.prompt}</p>
+        {currentQuestion.scenario ? (
+          <>
+            <button
+              type="button"
+              onClick={() => setMobileScenarioOpen((prev) => !prev)}
+              className="mb-2 rounded-md bg-zinc-800 px-2.5 py-1 text-xs sm:hidden"
+            >
+              {mobileScenarioOpen ? "Hide Scenario" : "Show Scenario"}
+            </button>
+            <p className={`mb-2 rounded-md bg-zinc-800 p-2.5 text-xs leading-5 sm:mb-3 sm:block sm:p-3 sm:text-sm sm:leading-6 ${mobileScenarioOpen ? "block" : "hidden"}`}>
+              {currentQuestion.scenario}
+            </p>
+          </>
+        ) : null}
+        <p className="text-sm font-medium leading-5 sm:text-base sm:leading-6">{currentQuestion.qid}: {currentQuestion.prompt}</p>
 
-        <div className="mt-4 space-y-2">
+        <div className="mt-2.5 space-y-1.5 sm:mt-4 sm:space-y-2">
           {currentQuestion.options.map((option) => {
             const selected = (answers[currentQuestion.id] || []).includes(option);
             const multi = currentQuestion.type !== "multiple-choice-single";
@@ -143,7 +209,7 @@ export function ExamRunner({ testId }: { testId: number }) {
               <button
                 type="button"
                 key={option}
-                className={`w-full rounded-md border px-3 py-2.5 text-left text-sm leading-6 ${
+                className={`w-full rounded-md border px-2.5 py-2 text-left text-[13px] leading-5 sm:px-3 sm:py-2.5 sm:text-sm sm:leading-6 ${
                   selected ? "border-cyan-500 bg-cyan-950/30" : "border-zinc-700 bg-zinc-800 hover:bg-zinc-700"
                 }`}
                 onClick={() => toggleOption(currentQuestion.id, option, multi)}
