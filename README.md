@@ -1,47 +1,18 @@
-# Security+ SY0-701 Prep (Static)
+# Security+ SY0-701 Prep
 
-Static Next.js site for CompTIA Security+ practice with:
+Security+ exam preparation website focused on two modules:
 
-- 35 mock tests
-- 90 questions per test
-- 90-minute timer + auto-submit
-- Single, multiple, and scenario-style questions
-- Study module with full topic sections and anchors
-- Local progress + results in browser storage
+- Mock Exams (35 tests, 90 questions each, timed, pass/fail scoring)
+- Study Guide (full SY0-701 domain coverage with topic sections)
 
-## Architecture
+## Current Version
 
-- Fully static export (`next.config.ts` uses `output: "export"`)
-- No API routes
-- No server/database dependency for runtime
-- Firebase Hosting serves static files from `out/`
+- Fully static site (Firebase Hosting compatible)
+- Mobile-first exam experience
+- Single-answer, multi-answer, and scenario-based questions
+- Local browser progress/results storage
 
-## Run locally
+## Important Note
 
-```bash
-npm install
-npm run dev
-```
-
-## Build static output
-
-```bash
-npm run build
-```
-
-This generates the static site in `out/`.
-
-## Deploy to Firebase Hosting
-
-```bash
-firebase login
-firebase use neurosc1
-npm run build
-firebase deploy --only hosting
-```
-
-## Notes
-
-- Dashboard was removed by design.
-- Study progress and exam attempts are saved in browser `localStorage`.
-- Clearing browser storage resets saved progress/results.
+User progress and exam history are stored in browser local storage.
+If browser data is cleared, saved progress/results are reset.
