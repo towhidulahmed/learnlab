@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
-import { ExamRunner } from "@/components/exam-runner";
+import { Suspense } from "react";
 import { MAX_MOCK_TESTS } from "@/lib/constants";
+import { ResultView } from "@/components/result-view";
 
 export const dynamicParams = false;
 
@@ -10,7 +11,11 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function MockTestPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function StaticResultPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   const testId = Number(id);
 
@@ -19,8 +24,8 @@ export default async function MockTestPage({ params }: { params: Promise<{ id: s
   }
 
   return (
-    <main>
-      <ExamRunner testId={testId} />
-    </main>
+    <Suspense fallback={<p className="text-zinc-400">Loading result...</p>}>
+      <ResultView testId={testId} />
+    </Suspense>
   );
 }

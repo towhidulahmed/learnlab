@@ -2,25 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-
-type Question = {
-  id: number;
-  qid: string;
-  prompt: string;
-  type: string;
-  difficulty: string;
-  options: string[];
-  explanation: string;
-  scenario?: string | null;
-  domainKey: string;
-  domainName: string;
-  studyPath: string;
-};
+import { buildExamForTest, evaluateExam, QuestionPayload } from "@/lib/exam";
+import { EXAM_DURATION_SECONDS } from "@/lib/constants";
+import { saveAttempt } from "@/lib/client-storage";
 
 type ExamResponse = {
   testNumber: number;
   durationSeconds: number;
-  questions: Question[];
+  questions: QuestionPayload[];
 };
 
 const formatTime = (seconds: number) => {
@@ -44,9 +33,12 @@ export function ExamRunner({ testId }: { testId: number }) {
   const [reviewMode, setReviewMode] = useState(false);
 
   useEffect(() => {
-    const load = async () => {
-      const response = await fetch(`/api/mock-tests/${testId}`);
-      const payload = (await response.json()) as ExamResponse;
+    const load = () => {
+      const payload: ExamResponse = {
+        testNumber: testId,
+        durationSeconds: EXAM_DURATION_SECONDS,
+        questions: buildExamForTest(testId),
+      };
       setExam(payload);
       setTimeLeft(payload.durationSeconds);
       setStartedAt(new Date().toISOString());
@@ -98,20 +90,21 @@ export function ExamRunner({ testId }: { testId: number }) {
     }
     setSubmitting(true);
 
-    const response = await fetch(`/api/mock-tests/${testId}/submit`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        startedAt,
-        endedAt: new Date().toISOString(),
-        answers,
-      }),
-    });
+    if (!exam) {
+      return;
+    }
 
-    const payload = (await response.json()) as { resultId: string };
-    router.push(`/mock-tests/${testId}/result/${payload.resultId}${autoSubmit ? "?auto=1" : ""}`);
+    const endedAt = new Date().toISOString();
+    const elapsedSeconds = Math.min(
+      EXAM_DURATION_SECONDS,
+      Math.max(0, Math.floor((new Date(endedAt).getTime() - new Date(startedAt).getTime()) / 1000)),
+    );
+
+    const attempt = evaluateExam(testId, startedAt, endedAt, elapsedSeconds, exam.questions, answers);
+    saveAttempt(attempt);
+
+    const suffix = autoSubmit ? `?attempt=${attempt.id}&auto=1` : `?attempt=${attempt.id}`;
+    router.push(`/mock-tests/${testId}/result${suffix}`);
   };
 
   if (loading || !exam || !currentQuestion) {

@@ -1,30 +1,17 @@
-import { prisma } from "@/lib/prisma";
 import { StudyModule } from "@/components/study-module";
-import { getStudyProgressMap } from "@/lib/progress-store";
+import { STATIC_SYLLABUS } from "@/lib/static-syllabus";
 
-export default async function StudyPage() {
-  const progressMap = await getStudyProgressMap();
+export const dynamic = "force-static";
 
-  const domains = await prisma.domain.findMany({
-    orderBy: {
-      id: "asc",
-    },
-    include: {
-      topics: {
-        orderBy: {
-          id: "asc",
-        },
-      },
-    },
-  });
-
-  const payload = domains.map((domain) => ({
+export default function StudyPage() {
+  const payload = STATIC_SYLLABUS.map((domain) => ({
     ...domain,
     topics: domain.topics.map((topic) => ({
       ...topic,
-      progress: {
-        studied: progressMap.get(topic.id) ?? false,
-      },
+      keyTerms: JSON.stringify(topic.keyTerms),
+      examples: JSON.stringify(topic.examples),
+      tips: JSON.stringify(topic.tips),
+      progress: null,
     })),
   }));
 

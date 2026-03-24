@@ -24,17 +24,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2">
+      <section className="grid gap-4 md:grid-cols-1">
         <Link href="/study" className="rounded-xl border border-zinc-800 bg-zinc-900 p-4 hover:bg-zinc-800/60 sm:p-5">
           <h3 className="font-semibold">Study Module</h3>
           <p className="mt-2 text-sm leading-6 text-zinc-400">
             Review all 5 official domains with concepts, key terms, examples, and memory tips.
-          </p>
-        </Link>
-        <Link href="/dashboard" className="rounded-xl border border-zinc-800 bg-zinc-900 p-4 hover:bg-zinc-800/60 sm:p-5">
-          <h3 className="font-semibold">Performance Dashboard</h3>
-          <p className="mt-2 text-sm leading-6 text-zinc-400">
-            Track pass rate, weak domains, and score improvements across completed tests.
           </p>
         </Link>
       </section>

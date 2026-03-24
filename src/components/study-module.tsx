@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { loadStudyProgress, saveStudyProgress } from "@/lib/client-storage";
 
 type Topic = {
   id: number;
@@ -32,6 +33,15 @@ export function StudyModule({ domains }: { domains: Domain[] }) {
     return initial;
   });
 
+  useEffect(() => {
+    const stored = loadStudyProgress();
+    setState((prev) => ({ ...prev, ...stored }));
+  }, []);
+
+  useEffect(() => {
+    saveStudyProgress(state);
+  }, [state]);
+
   const progressPct = useMemo(() => {
     const values = Object.values(state);
     if (!values.length) {
@@ -41,15 +51,8 @@ export function StudyModule({ domains }: { domains: Domain[] }) {
     return Math.round((studied / values.length) * 100);
   }, [state]);
 
-  const setStudied = async (topicId: number, studied: boolean) => {
+  const setStudied = (topicId: number, studied: boolean) => {
     setState((prev) => ({ ...prev, [topicId]: studied }));
-    await fetch("/api/study/progress", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ topicId, studied }),
-    });
   };
 
   return (
