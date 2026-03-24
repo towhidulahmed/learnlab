@@ -1,16 +1,23 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Link from "next/link";
+import { MobileNav } from "@/components/mobile-nav";
 
 export const metadata: Metadata = {
   title: "Security+ SY0-701 Prep",
   description: "Static CompTIA Security+ exam practice and study platform",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Sec+ Prep",
+  },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -19,25 +26,36 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
-        <div className="mx-auto min-h-screen max-w-7xl px-3 py-4 sm:px-6 sm:py-6">
-          <header className="mb-5 hidden flex-wrap items-center justify-between gap-3 rounded-xl border border-zinc-800 bg-zinc-900/70 px-3 py-3 sm:mb-8 sm:flex sm:px-4">
+        <div className="mx-auto min-h-dvh max-w-5xl px-0 pb-20 sm:px-6 sm:pb-6 sm:pt-6">
+          {/* Desktop header */}
+          <header className="mb-8 hidden items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/70 px-5 py-4 sm:flex">
             <div>
-              <h1 className="text-lg font-semibold sm:text-xl">Security+ SY0-701 Prep</h1>
-              <p className="text-xs text-zinc-400 sm:text-sm">Mock tests and study guide</p>
+              <Link href="/">
+                <h1 className="text-xl font-bold tracking-tight">Security+ SY0-701 Prep</h1>
+              </Link>
+              <p className="mt-0.5 text-sm text-zinc-400">CompTIA exam practice & study guide</p>
             </div>
-            <nav className="grid w-full grid-cols-2 gap-2 text-center text-sm sm:flex sm:w-auto sm:text-left">
-              <Link className="rounded-md bg-zinc-800 px-2 py-2 hover:bg-zinc-700 sm:px-3" href="/">
+            <nav className="flex gap-2 text-sm">
+              <Link
+                className="rounded-lg bg-zinc-800 px-4 py-2.5 font-medium transition-colors hover:bg-zinc-700"
+                href="/"
+              >
                 Home
               </Link>
-              <Link className="rounded-md bg-zinc-800 px-2 py-2 hover:bg-zinc-700 sm:px-3" href="/study">
-                Study
+              <Link
+                className="rounded-lg bg-zinc-800 px-4 py-2.5 font-medium transition-colors hover:bg-zinc-700"
+                href="/study"
+              >
+                Study Guide
               </Link>
             </nav>
           </header>
           {children}
         </div>
+        {/* Mobile bottom tab bar — hidden during exam */}
+        <MobileNav />
       </body>
     </html>
   );
