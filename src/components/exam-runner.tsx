@@ -33,7 +33,6 @@ export function ExamRunner({ testId }: { testId: number }) {
   const [submitting, setSubmitting] = useState(false);
   const [reviewMode, setReviewMode] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileScenarioOpen, setMobileScenarioOpen] = useState(false);
 
   useEffect(() => {
     const load = () => {
@@ -73,10 +72,6 @@ export function ExamRunner({ testId }: { testId: number }) {
   const currentQuestion = exam?.questions[index];
 
   const answeredCount = useMemo(() => Object.keys(answers).filter((key) => answers[Number(key)]?.length > 0).length, [answers]);
-
-  useEffect(() => {
-    setMobileScenarioOpen(false);
-  }, [index]);
 
   const requiredSelections = (question: QuestionPayload) => (question.type === "multiple-choice-multiple" ? 3 : 1);
 
@@ -180,28 +175,15 @@ export function ExamRunner({ testId }: { testId: number }) {
         ) : null}
       </div>
 
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-2.5 sm:p-4">
-        <div className="mb-2 flex flex-col gap-1 text-[11px] sm:mb-3 sm:flex-row sm:items-center sm:justify-between sm:text-sm">
-          <span className="w-fit rounded-md bg-zinc-800 px-2 py-1">{currentQuestion.type}</span>
-          <span className="text-zinc-400">Difficulty: {currentQuestion.difficulty}</span>
-        </div>
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-3 sm:p-4">
         {currentQuestion.scenario ? (
-          <>
-            <button
-              type="button"
-              onClick={() => setMobileScenarioOpen((prev) => !prev)}
-              className="mb-2 rounded-md bg-zinc-800 px-2.5 py-1 text-xs sm:hidden"
-            >
-              {mobileScenarioOpen ? "Hide Scenario" : "Show Scenario"}
-            </button>
-            <p className={`mb-2 rounded-md bg-zinc-800 p-2.5 text-xs leading-5 sm:mb-3 sm:block sm:p-3 sm:text-sm sm:leading-6 ${mobileScenarioOpen ? "block" : "hidden"}`}>
-              {currentQuestion.scenario}
-            </p>
-          </>
+          <p className="mb-3 rounded-md bg-zinc-800 p-3 text-sm leading-6 text-zinc-300">
+            {currentQuestion.scenario}
+          </p>
         ) : null}
-        <p className="text-sm font-medium leading-5 sm:text-base sm:leading-6">{currentQuestion.qid}: {currentQuestion.prompt}</p>
+        <p className="text-base font-medium leading-7 sm:text-lg sm:leading-8">{currentQuestion.prompt}</p>
 
-        <div className="mt-2.5 space-y-1.5 sm:mt-4 sm:space-y-2">
+        <div className="mt-3 space-y-2 sm:mt-4 sm:space-y-2.5">
           {currentQuestion.options.map((option) => {
             const selected = (answers[currentQuestion.id] || []).includes(option);
             const multi = currentQuestion.type !== "multiple-choice-single";
@@ -209,7 +191,7 @@ export function ExamRunner({ testId }: { testId: number }) {
               <button
                 type="button"
                 key={option}
-                className={`w-full rounded-md border px-2.5 py-2 text-left text-[13px] leading-5 sm:px-3 sm:py-2.5 sm:text-sm sm:leading-6 ${
+                className={`min-h-[52px] w-full rounded-md border px-3 py-2.5 text-left text-base leading-6 sm:min-h-[56px] sm:px-3.5 sm:py-3 sm:text-base ${
                   selected ? "border-cyan-500 bg-cyan-950/30" : "border-zinc-700 bg-zinc-800 hover:bg-zinc-700"
                 }`}
                 onClick={() => toggleOption(currentQuestion.id, option, multi)}
@@ -220,7 +202,8 @@ export function ExamRunner({ testId }: { testId: number }) {
           })}
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+        <div className="mt-10 border-t border-zinc-800 pt-4 sm:mt-8 sm:pt-4">
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
           <button
             type="button"
             onClick={() => setFlags((prev) => ({ ...prev, [currentQuestion.id]: !prev[currentQuestion.id] }))}
@@ -258,6 +241,7 @@ export function ExamRunner({ testId }: { testId: number }) {
           >
             {submitting ? "Submitting..." : "Submit Exam"}
           </button>
+          </div>
         </div>
       </div>
 
