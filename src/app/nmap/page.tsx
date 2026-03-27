@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NMAP_TOTAL_FLASHCARDS, NMAP_TOTAL_TOPICS, NMAP_STUDY } from "@/lib/nmap-study-data";
+import { NMAP_TOTAL_FLASHCARDS, NMAP_TOTAL_TOPICS } from "@/lib/nmap-study-data";
 import { NMAP_QUESTIONS } from "@/lib/nmap-questions";
 
 export default function NmapHome() {
@@ -89,30 +89,6 @@ export default function NmapHome() {
           </div>
         </Link>
       </div>
-
-      {/* Domain overview */}
-      <section className="rounded-2xl border border-zinc-800 bg-zinc-900 p-4 sm:rounded-xl sm:p-5">
-        <h3 className="mb-3 text-base font-semibold">Course Domains</h3>
-        <div className="space-y-2">
-          {NMAP_STUDY.map((domain) => (
-            <div key={domain.key} className="flex items-center justify-between rounded-xl border border-zinc-700/40 bg-zinc-800/40 px-4 py-2.5">
-              <div>
-                <span className="text-sm font-medium text-zinc-200">{domain.name}</span>
-                <span className={`ml-2 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide ${
-                  domain.level === "beginner"
-                    ? "bg-emerald-950/50 text-emerald-400"
-                    : domain.level === "intermediate"
-                    ? "bg-amber-950/50 text-amber-400"
-                    : "bg-rose-950/50 text-rose-400"
-                }`}>
-                  {domain.level}
-                </span>
-              </div>
-              <span className="text-xs text-zinc-500">{domain.topics.length} topics</span>
-            </div>
-          ))}
-        </div>
-      </section>
     </main>
   );
 }
