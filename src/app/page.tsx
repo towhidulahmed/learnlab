@@ -45,14 +45,14 @@ export default function Home() {
   return (
     <main className="px-3 pt-4 sm:px-0 sm:pt-0">
       {/* Hero — full-width centered */}
-      <section className="flex flex-col items-center justify-center py-8 text-center sm:py-20">
-        <h2 className="hidden text-4xl font-extrabold tracking-tight sm:block sm:text-5xl lg:text-6xl">
+      <section className="flex flex-col items-center justify-center pt-12 pb-8 text-center sm:py-20">
+        <h2 className="text-3xl font-black tracking-tight sm:text-5xl sm:font-extrabold lg:text-6xl">
           Stuick
         </h2>
-        <p className="text-base text-zinc-400 sm:mt-4 sm:text-lg">
+        <p className="mt-3 text-base font-semibold text-zinc-300 sm:mt-4 sm:text-lg sm:font-normal sm:text-zinc-400">
           Why Study Long When You Can Study Quick
         </p>
-        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-zinc-500 sm:text-base">
+        <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-zinc-500 sm:max-w-md sm:mt-4 sm:text-base">
           Pick a course and start learning with flashcards, practice questions, and mock exams — all in one place.
         </p>
       </section>
