@@ -96,15 +96,16 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="mt-10 pb-2 text-center sm:mt-14">
-        <p className="text-xs text-zinc-600">
-          © {new Date().getFullYear()} Stuick · Made by{" "}
+        <p className="text-xs text-zinc-600">© {new Date().getFullYear()} Stuick</p>
+        <p className="mt-1 flex items-center justify-center gap-1.5 text-[11px] text-zinc-700">
+          <span className="font-mono text-zinc-600">&lt;/&gt;</span>
           <a
             href="https://www.towhid.info"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-zinc-500 underline underline-offset-2 transition-colors hover:text-zinc-400"
+            className="text-zinc-600 transition-colors hover:text-zinc-400"
           >
-            Towhid
+            towhid.info
           </a>
         </p>
       </footer>

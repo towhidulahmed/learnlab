@@ -41,6 +41,24 @@ export function ResultView({ testId }: { testId: number }) {
 
   return (
     <main className="space-y-4 px-3 pt-4 sm:space-y-6 sm:px-0 sm:pt-0">
+      {/* Header */}
+      <section className="rounded-2xl border border-zinc-800 bg-gradient-to-br from-cyan-950/30 to-zinc-900 p-5 sm:rounded-xl sm:p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Mock Test {testId} — Result</h2>
+            <p className="mt-2 text-sm leading-6 text-zinc-400">
+              Review your score and identify areas for improvement.
+            </p>
+          </div>
+          <Link
+            href="/security-plus"
+            className="flex-shrink-0 rounded-lg bg-zinc-800 px-3 py-2 text-sm font-medium text-zinc-300 transition-colors hover:bg-zinc-700 active:bg-zinc-600"
+          >
+            ← Back
+          </Link>
+        </div>
+      </section>
+
       {/* Score hero card */}
       <section className={`overflow-hidden rounded-2xl border sm:rounded-xl ${result.pass ? "border-emerald-700/40" : "border-rose-700/40"}`}>
         <div className={`px-5 py-6 sm:px-6 sm:py-8 ${result.pass ? "bg-gradient-to-br from-emerald-950/60 to-zinc-900" : "bg-gradient-to-br from-rose-950/60 to-zinc-900"}`}>
