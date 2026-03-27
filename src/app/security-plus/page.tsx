@@ -31,16 +31,21 @@ export default function SecurityPlusHome() {
       <div className="grid gap-4 sm:grid-cols-2">
         <Link
           href="/security-plus/mock-tests"
-          className="group block rounded-2xl border border-zinc-800 bg-zinc-900 p-5 transition-colors active:bg-zinc-800/80 sm:rounded-xl sm:hover:bg-zinc-800/60 sm:col-span-2"
+          className="group relative block overflow-hidden rounded-2xl border border-cyan-800/50 bg-gradient-to-br from-cyan-950/40 to-zinc-900 p-5 transition-colors active:from-cyan-900/50 sm:rounded-xl sm:col-span-2 sm:hover:from-cyan-950/60"
         >
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-semibold">Mock Tests</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-semibold">Mock Tests</h3>
+                <span className="rounded-full bg-cyan-900/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-cyan-400">
+                  {MAX_MOCK_TESTS} Exams
+                </span>
+              </div>
               <p className="mt-1 text-sm leading-6 text-zinc-400">
-                {MAX_MOCK_TESTS} full-length SY0-701 exams — 90 minutes, 90 questions each.
+                Full-length SY0-701 exams — 90 minutes, 90 questions each.
               </p>
             </div>
-            <span className="flex-shrink-0 text-lg text-cyan-500/60 transition-transform group-hover:translate-x-1">→</span>
+            <span className="flex-shrink-0 text-lg text-cyan-400/70 transition-transform group-hover:translate-x-1">→</span>
           </div>
         </Link>
         <Link
