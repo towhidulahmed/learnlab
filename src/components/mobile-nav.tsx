@@ -22,7 +22,7 @@ export function MobileNav() {
   // Security+ section nav — Sec+ / Study / Flashcards / Practice
   if (inSecPlus) {
     return (
-      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-zinc-800 bg-zinc-900/95 pb-[max(0.25rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[#1a2438]/70 bg-[#05060c]/97 pb-[max(0.25rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:hidden">
         <div className="mx-auto flex max-w-lg items-stretch">
           <Link
             href="/security-plus"
@@ -76,7 +76,7 @@ export function MobileNav() {
   // Nmap section nav — 4 buttons, course-specific
   if (inNmap) {
     return (
-      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-zinc-800 bg-zinc-900/95 pb-[max(0.25rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[#1a2438]/70 bg-[#05060c]/97 pb-[max(0.25rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:hidden">
         <div className="mx-auto flex max-w-lg items-stretch">
           <Link
             href="/nmap"
@@ -129,7 +129,7 @@ export function MobileNav() {
 
   // Linux section nav — 4 buttons, course-specific
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-zinc-800 bg-zinc-900/95 pb-[max(0.25rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[#1a2438]/70 bg-[#05060c]/97 pb-[max(0.25rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:hidden">
       <div className="mx-auto flex max-w-lg items-stretch">
         <Link
           href="/linux"

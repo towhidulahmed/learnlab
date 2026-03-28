@@ -6,21 +6,21 @@ export default function NmapHome() {
   return (
     <main className="space-y-4 px-3 pt-4 sm:space-y-6 sm:px-0 sm:pt-0">
       {/* Hero */}
-      <section className="rounded-2xl border border-zinc-800 bg-gradient-to-br from-orange-950/30 to-zinc-900 p-5 sm:rounded-xl sm:p-6">
+      <section className="rounded-2xl border border-[#2e1f0e]/70 bg-gradient-to-br from-orange-950/50 via-[#120c06] to-[#080b10] p-5 sm:rounded-xl sm:p-6">
         <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Nmap — Network Scanning</h2>
         <p className="mt-2 text-sm leading-6 text-zinc-400">
           Master Nmap for host discovery, port scanning, service detection, OS fingerprinting, and evasion techniques.
         </p>
         <div className="mt-4 grid grid-cols-3 gap-2.5">
-          <div className="rounded-lg bg-zinc-800/60 px-3 py-2.5 text-center">
+          <div className="rounded-lg bg-[#1e1006]/70 px-3 py-2.5 text-center">
             <p className="text-lg font-bold text-zinc-200">{NMAP_QUESTIONS.length}</p>
             <p className="text-[10px] text-zinc-500">Questions</p>
           </div>
-          <div className="rounded-lg bg-zinc-800/60 px-3 py-2.5 text-center">
+          <div className="rounded-lg bg-[#1e1006]/70 px-3 py-2.5 text-center">
             <p className="text-lg font-bold text-zinc-200">{NMAP_TOTAL_FLASHCARDS}</p>
             <p className="text-[10px] text-zinc-500">Flashcards</p>
           </div>
-          <div className="rounded-lg bg-zinc-800/60 px-3 py-2.5 text-center">
+          <div className="rounded-lg bg-[#1e1006]/70 px-3 py-2.5 text-center">
             <p className="text-lg font-bold text-zinc-200">{NMAP_TOTAL_TOPICS}</p>
             <p className="text-[10px] text-zinc-500">Topics</p>
           </div>
@@ -31,7 +31,7 @@ export default function NmapHome() {
       <div className="grid gap-4 sm:grid-cols-2">
         <Link
           href="/nmap/study"
-          className="group block rounded-2xl border border-zinc-800 bg-zinc-900 p-5 transition-colors active:bg-zinc-800/80 sm:rounded-xl sm:hover:bg-zinc-800/60"
+          className="group block rounded-2xl border border-[#1c2438]/70 bg-gradient-to-br from-[#0e1220]/90 to-[#0b0d16] p-5 transition-all active:from-[#131a2e]/90 sm:rounded-xl sm:hover:from-[#111827]/90 sm:hover:border-[#253050]/60"
         >
           <div className="flex items-center justify-between">
             <div>
@@ -46,7 +46,7 @@ export default function NmapHome() {
 
         <Link
           href="/nmap/flashcards"
-          className="group block rounded-2xl border border-zinc-800 bg-zinc-900 p-5 transition-colors active:bg-zinc-800/80 sm:rounded-xl sm:hover:bg-zinc-800/60"
+          className="group block rounded-2xl border border-[#1c2438]/70 bg-gradient-to-br from-[#0e1220]/90 to-[#0b0d16] p-5 transition-all active:from-[#131a2e]/90 sm:rounded-xl sm:hover:from-[#111827]/90 sm:hover:border-[#253050]/60"
         >
           <div className="flex items-center justify-between">
             <div>
@@ -61,7 +61,7 @@ export default function NmapHome() {
 
         <Link
           href="/nmap/practice"
-          className="group block rounded-2xl border border-zinc-800 bg-zinc-900 p-5 transition-colors active:bg-zinc-800/80 sm:rounded-xl sm:hover:bg-zinc-800/60"
+          className="group block rounded-2xl border border-[#1c2438]/70 bg-gradient-to-br from-[#0e1220]/90 to-[#0b0d16] p-5 transition-all active:from-[#131a2e]/90 sm:rounded-xl sm:hover:from-[#111827]/90 sm:hover:border-[#253050]/60"
         >
           <div className="flex items-center justify-between">
             <div>
@@ -76,7 +76,7 @@ export default function NmapHome() {
 
         <Link
           href="/nmap/syllabus"
-          className="group block rounded-2xl border border-zinc-800 bg-zinc-900 p-5 transition-colors active:bg-zinc-800/80 sm:rounded-xl sm:hover:bg-zinc-800/60"
+          className="group block rounded-2xl border border-[#1c2438]/70 bg-gradient-to-br from-[#0e1220]/90 to-[#0b0d16] p-5 transition-all active:from-[#131a2e]/90 sm:rounded-xl sm:hover:from-[#111827]/90 sm:hover:border-[#253050]/60"
         >
           <div className="flex items-center justify-between">
             <div>

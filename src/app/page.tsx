@@ -82,7 +82,7 @@ export default function Home() {
           <Link
             key={course.href}
             href={course.href}
-            className={`group flex flex-col rounded-2xl border border-zinc-800 bg-zinc-900 p-5 transition-all active:bg-zinc-800/80 sm:rounded-xl sm:p-6 sm:hover:bg-zinc-800/40 ${course.accentClasses.card}`}
+            className={`group flex flex-col rounded-2xl border border-[#1c2438]/70 bg-gradient-to-br from-[#0e1220]/90 to-[#0b0d16] p-5 transition-all active:from-[#131a2e]/90 sm:rounded-xl sm:p-6 sm:hover:from-[#111827]/90 sm:hover:border-[#253050]/60 ${course.accentClasses.card}`}
           >
             <div className="flex items-center gap-3">
               <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl ${course.accentClasses.iconBg}`}>
@@ -103,7 +103,7 @@ export default function Home() {
               {course.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md bg-zinc-800 px-2 py-0.5 text-[11px] font-medium text-zinc-400"
+                  className="rounded-md bg-[#151c2e]/80 px-2 py-0.5 text-[11px] font-medium text-zinc-400"
                 >
                   {tag}
                 </span>

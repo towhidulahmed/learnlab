@@ -12,8 +12,12 @@ html {
 }
 
 body {
-  background: #09090b;
-  color: #e4e4e7;
+  background: #07080f;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% -5%, rgba(14, 24, 52, 0.55) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 30% at 80% 100%, rgba(10, 18, 36, 0.3) 0%, transparent 60%);
+  background-attachment: fixed;
+  color: #e2e4ea;
   min-height: 100dvh;
   font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
@@ -49,7 +53,7 @@ button, a {
     background: transparent;
   }
   .overflow-y-auto::-webkit-scrollbar-thumb {
-    background: #3f3f46;
+    background: #1e2d45;
     border-radius: 4px;
   }
 }
