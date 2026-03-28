@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { MAX_MOCK_TESTS } from "@/lib/constants";
+import { MAX_MOCK_TESTS, DOMAIN_COUNTS } from "@/lib/constants";
 import { SECPLUS_TOTAL_FLASHCARDS } from "@/lib/secplus-flashcard-data";
 
 export default function SecurityPlusHome() {
+  const totalTopics = Object.values(DOMAIN_COUNTS).reduce((a, b) => a + b, 0);
+
   return (
     <main className="space-y-4 px-3 pt-4 sm:space-y-6 sm:px-0 sm:pt-0">
       {/* Hero */}
@@ -13,8 +15,8 @@ export default function SecurityPlusHome() {
         </p>
         <div className="mt-4 grid grid-cols-3 gap-2.5">
           <div className="rounded-lg bg-[#0c1a26]/70 px-3 py-2.5 text-center">
-            <p className="text-lg font-bold text-zinc-200">410</p>
-            <p className="text-[10px] text-zinc-500">Questions</p>
+            <p className="text-lg font-bold text-zinc-200">{totalTopics}</p>
+            <p className="text-[10px] text-zinc-500">Topics</p>
           </div>
           <div className="rounded-lg bg-[#0c1a26]/70 px-3 py-2.5 text-center">
             <p className="text-lg font-bold text-zinc-200">90 min</p>
