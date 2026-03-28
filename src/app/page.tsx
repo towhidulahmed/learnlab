@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
+import { DOMAIN_KEYS } from "@/lib/constants";
+import { LINUX_STUDY } from "@/lib/linux-study-data";
+import { NMAP_TOTAL_TOPICS } from "@/lib/nmap-study-data";
 
 const COURSES = [
   {
@@ -13,7 +16,7 @@ const COURSES = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
       </svg>
     ),
-    tags: ["410 Questions", "Mock Exams", "Study Guide"],
+    tags: [`${DOMAIN_KEYS.length} Domains`, "Mock Exams", "Study Guide"],
     accentClasses: {
       card: "sm:hover:border-cyan-800/40",
       iconBg: "bg-cyan-950/40 text-cyan-400",
@@ -32,7 +35,7 @@ const COURSES = [
         <path strokeLinecap="round" strokeLinejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25z" />
       </svg>
     ),
-    tags: ["16 Topics", "Flashcards", "Practice"],
+    tags: [`${LINUX_STUDY.reduce((s, d) => s + d.topics.length, 0)} Topics`, "Flashcards", "Practice"],
     accentClasses: {
       card: "sm:hover:border-emerald-800/40",
       iconBg: "bg-emerald-950/40 text-emerald-400",
@@ -51,7 +54,7 @@ const COURSES = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0H3" />
       </svg>
     ),
-    tags: ["13 Topics", "Flashcards", "Practice"],
+    tags: [`${NMAP_TOTAL_TOPICS} Topics`, "Flashcards", "Practice"],
     accentClasses: {
       card: "sm:hover:border-orange-800/40",
       iconBg: "bg-orange-950/40 text-orange-400",
