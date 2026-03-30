@@ -84,6 +84,26 @@ const COURSES = [
   },
 ];
 
+const colorMap: Record<string, string> = {
+  emerald: "bg-emerald-950/50 text-emerald-400 border-emerald-900/40",
+  blue: "bg-blue-950/50 text-blue-400 border-blue-900/40",
+  orange: "bg-orange-950/50 text-orange-400 border-orange-900/40",
+  cyan: "bg-cyan-950/50 text-cyan-400 border-cyan-900/40",
+};
+
+function PathStep({ num, label, href, color }: { num: number; label: string; href: string; color: string }) {
+  return (
+    <a href={href} className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-medium transition-opacity hover:opacity-80 ${colorMap[color]}`}>
+      <span className="opacity-60">{num}.</span>
+      {label}
+    </a>
+  );
+}
+
+function Arrow() {
+  return <span className="text-zinc-700 text-xs">→</span>;
+}
+
 export default function Home() {
   return (
     <main className="px-3 pt-4 sm:px-0 sm:pt-0">
@@ -136,6 +156,23 @@ export default function Home() {
           </Link>
         ))}
       </div>
+
+      {/* Recommended Learning Path */}
+      <section className="mx-auto mt-8 max-w-3xl sm:mt-10">
+        <h3 className="mb-3 text-xs font-semibold uppercase tracking-widest text-zinc-600">Recommended Learning Path</h3>
+        <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-[#1c2438]/50 bg-[#0a0c14]/60 px-4 py-3 sm:rounded-xl">
+          <PathStep num={1} label="Linux Admin" href="/linux" color="emerald" />
+          <Arrow />
+          <PathStep num={2} label="Unix Security" href="/unix-security" color="blue" />
+          <Arrow />
+          <PathStep num={3} label="Nmap" href="/nmap" color="orange" />
+          <Arrow />
+          <PathStep num={4} label="Security+" href="/security-plus" color="cyan" />
+        </div>
+        <p className="mt-2 text-[11px] text-zinc-600">
+          Linux Admin builds the foundation. Unix Security adds threat detection. Nmap adds offensive recon. Security+ ties it all together for the cert.
+        </p>
+      </section>
 
       {/* Footer */}
       <footer className="mt-10 pb-2 text-center sm:mt-14">

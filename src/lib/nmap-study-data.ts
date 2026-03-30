@@ -724,7 +724,11 @@ This saves three format files and gives comprehensive results. XML can be import
       {
         slug: "firewall-evasion",
         title: "Firewall/IDS Evasion",
-        content: `Nmap includes several techniques designed to bypass firewalls, evade intrusion detection systems (IDS), and obscure the source of a scan. These are critical skills in penetration testing but must only be used against systems you have explicit authorization to test.
+        content: `**Authorization Required — Every Technique in This Module**
+
+Using evasion techniques against systems you do not own or do not have written permission to test is illegal in most jurisdictions. This includes decoy scans, idle scans, source IP spoofing, and source port manipulation. The Computer Fraud and Abuse Act (US), Computer Misuse Act (UK), and equivalent laws worldwide treat unauthorized scanning as a criminal offence, even if no data is stolen. Use these only in authorized penetration tests, your own lab, or dedicated practice ranges like HackTheBox and TryHackMe.
+
+Nmap includes several techniques designed to bypass firewalls, evade intrusion detection systems (IDS), and obscure the source of a scan. These are critical skills in penetration testing but must only be used against systems you have explicit authorization to test.
 
 **Packet Fragmentation (\`-f\`):**
 Splits IP packets into tiny 8-byte fragments. Many older firewalls and packet filters can't reassemble fragments for inspection. Double fragmentation (\`-ff\` or \`--mtu 16\`) uses 16-byte fragments. Requires raw socket access.

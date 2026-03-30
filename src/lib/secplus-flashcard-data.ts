@@ -3,26 +3,31 @@ import type { LinuxDomain } from "./linux-study-data";
 
 /**
  * Generate flashcards from Security+ syllabus data.
- * Each topic produces flashcards from keyTerms, tips, and examples.
+ * Each topic produces flashcards from keyTerms and tips.
  */
 function generateFlashcards(topic: (typeof STATIC_SYLLABUS)[number]["topics"][number]): { front: string; back: string }[] {
   const cards: { front: string; back: string }[] = [];
 
-  // Key terms as flashcards, ask "What is X?"
+  // Key terms as flashcards
   for (const term of topic.keyTerms) {
-    cards.push({
-      front: `What is ${term}?`,
-      back: extractDefinition(topic.content, term),
-    });
+    const definition = extractDefinition(topic.content, term);
+    if (definition) {
+      cards.push({
+        front: `What is ${term}?`,
+        back: cleanMarkdown(definition),
+      });
+    }
   }
 
-  // Tips as flashcards
+  // Tips as flashcards — use only tips that contain a clear question stem
   for (const tip of topic.tips) {
-    const parts = tip.split(".");
-    if (parts.length >= 2) {
+    const colonIdx = tip.indexOf(":");
+    const periodIdx = tip.indexOf(".");
+    const splitIdx = colonIdx > 0 && colonIdx < 80 ? colonIdx : periodIdx > 0 && periodIdx < 80 ? periodIdx : -1;
+    if (splitIdx > 10) {
       cards.push({
-        front: parts[0].trim() + "?",
-        back: tip,
+        front: tip.slice(0, splitIdx).trim().replace(/\?$/, "") + "?",
+        back: cleanMarkdown(tip),
       });
     }
   }
@@ -30,26 +35,73 @@ function generateFlashcards(topic: (typeof STATIC_SYLLABUS)[number]["topics"][nu
   return cards;
 }
 
-/** Extract a relevant sentence/paragraph about a term from content */
+/** Strip markdown formatting from a string for clean flashcard display */
+function cleanMarkdown(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, "$1")
+    .replace(/\*(.*?)\*/g, "$1")
+    .replace(/`(.*?)`/g, "$1")
+    .replace(/^[#\-*>]+\s*/gm, "")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/\n{2,}/g, " ")
+    .trim();
+}
+
+/**
+ * Extract a definition for a term from markdown content.
+ * Uses 3 strategies in order of reliability.
+ */
 function extractDefinition(content: string, term: string): string {
   const lines = content.split("\n");
   const termLower = term.toLowerCase();
+  // Also try the first word of multi-word/slash terms (e.g. "FIDO2/WebAuthn" → "FIDO2")
+  const termBase = termLower.split(/[\/\s]/)[0];
 
-  // Look for lines mentioning the term
+  // Strategy 1: Look for bold-formatted term in a bullet: "**Term**," or "**Term (...)** —"
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
-    if (line.toLowerCase().includes(termLower) && line.trim().length > 20) {
-      // Get this line and possibly the next for context
-      let result = line.replace(/^[#\-*]+\s*/, "").trim();
-      if (result.length < 60 && i + 1 < lines.length) {
-        const next = lines[i + 1].replace(/^[#\-*]+\s*/, "").trim();
+    const lineLower = line.toLowerCase();
+    if (
+      (lineLower.includes(`**${termLower}**`) || lineLower.includes(`**${termBase}`)) &&
+      line.trim().length > 15
+    ) {
+      let result = line.replace(/^[\s\-*]+/, "").trim();
+      // If the line itself is short (just the bold header), grab the next line too
+      if (result.replace(/\*\*/g, "").length < 60 && i + 1 < lines.length) {
+        const next = lines[i + 1].replace(/^[\s\-*#]+/, "").trim();
         if (next.length > 0) result += " " + next;
       }
-      return result.slice(0, 300);
+      if (result.replace(/\*\*/g, "").length > 20) return result.slice(0, 350);
     }
   }
 
-  return `A key concept in ${term}, review the study guide for details.`;
+  // Strategy 2: Any line containing the term that is long enough to be a definition
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const lineLower = line.toLowerCase();
+    if (
+      (lineLower.includes(termLower) || lineLower.includes(termBase)) &&
+      line.trim().length > 40 &&
+      !line.trim().startsWith("#")
+    ) {
+      let result = line.replace(/^[\s\-*]+/, "").trim();
+      if (result.replace(/\*\*/g, "").length < 80 && i + 1 < lines.length) {
+        const next = lines[i + 1].replace(/^[\s\-*#]+/, "").trim();
+        if (next.length > 0) result += " " + next;
+      }
+      return result.slice(0, 350);
+    }
+  }
+
+  // Strategy 3: Return the first meaningful non-header sentence from the topic content
+  for (const line of lines) {
+    const cleaned = line.replace(/^[#\s\-*]+/, "").replace(/\*\*/g, "").trim();
+    if (cleaned.length > 50 && !cleaned.startsWith("##") && !cleaned.startsWith("###")) {
+      return cleaned.slice(0, 350);
+    }
+  }
+
+  return "";
 }
 
 /**

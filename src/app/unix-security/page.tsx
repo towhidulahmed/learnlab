@@ -6,7 +6,15 @@ export default function UnixSecurityHome() {
     <main className="space-y-4 px-3 pt-4 sm:space-y-6 sm:px-0 sm:pt-0">
       {/* Hero */}
       <section className="rounded-2xl border border-[#1a2840]/70 bg-gradient-to-br from-blue-950/50 via-[#07090f] to-[#080b12] p-5 sm:rounded-xl sm:p-6">
-        <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Unix Security Monitoring</h2>
+        <div className="flex flex-wrap items-start justify-between gap-2">
+          <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Unix Security Monitoring</h2>
+          <Link
+            href="/linux"
+            className="flex-shrink-0 rounded-md border border-emerald-900/50 bg-emerald-950/30 px-2.5 py-1 text-[11px] font-medium text-emerald-400 transition-colors hover:bg-emerald-950/50"
+          >
+            ← Prerequisite: Linux Admin
+          </Link>
+        </div>
         <p className="mt-2 text-sm leading-6 text-zinc-400">
           Learn to detect C2 backdoors and malicious activity on Unix and macOS systems. Covers processes, network connections, persistence, log analysis, and step-by-step C2 detection techniques.
         </p>
