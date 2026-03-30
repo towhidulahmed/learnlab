@@ -74,6 +74,24 @@ export default function UnixSecurityHome() {
         </Link>
 
         <Link
+          href="/unix-security/terminal"
+          className="group block rounded-2xl border border-blue-800/30 bg-gradient-to-br from-blue-950/30 to-[#0b0d16] p-5 transition-all active:from-blue-950/40 sm:rounded-xl sm:hover:from-blue-950/40 sm:hover:border-blue-700/30 sm:col-span-2"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-semibold">Terminal Practice</h3>
+                <span className="rounded-full bg-blue-900/50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-blue-400">Interactive</span>
+              </div>
+              <p className="mt-1 text-sm leading-6 text-zinc-400">
+                Practice threat detection commands on a simulated system with real security artifacts.
+              </p>
+            </div>
+            <span className="flex-shrink-0 text-lg text-blue-400/70 transition-transform group-hover:translate-x-1">→</span>
+          </div>
+        </Link>
+
+        <Link
           href="/unix-security/syllabus"
           className="group block rounded-2xl border border-[#1c2438]/70 bg-gradient-to-br from-[#0e1220]/90 to-[#0b0d16] p-5 transition-all active:from-[#131a2e]/90 sm:rounded-xl sm:hover:from-[#111827]/90 sm:hover:border-[#253050]/60"
         >
