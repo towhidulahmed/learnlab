@@ -4,7 +4,7 @@ A quick learning and practice site for different courses. Pick a course, study t
 
 Currently covers CompTIA Security+, Linux Administration, and Nmap.
 
-[neurosc1.web.app](https://neurosc1.web.app)
+[stuick-site.web.app](https://stuick-site.web.app)
 
 ---
 
