@@ -3,6 +3,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { MobileNav } from "@/components/mobile-nav";
 import { CourseNavBar } from "@/components/course-nav-bar";
+import { PageFooter } from "@/components/page-footer";
 
 export const metadata: Metadata = {
   title: "Stuick, Why Study Long When You Can Study Quick",
@@ -37,6 +38,7 @@ export default function RootLayout({
           <SiteHeader />
           <CourseNavBar />
           {children}
+          <PageFooter />
         </div>
         {/* Mobile bottom tab bar, hidden during exam */}
         <MobileNav />

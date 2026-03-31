@@ -1,6 +1,5 @@
 import { StudyModule } from "@/components/study-module";
 import { STATIC_SYLLABUS } from "@/lib/static-syllabus";
-import { PageFooter } from "@/components/page-footer";
 
 export const dynamic = "force-static";
 
@@ -19,7 +18,6 @@ export default function StudyPage() {
   return (
     <main>
       <StudyModule domains={payload} />
-      <PageFooter />
     </main>
   );
 }

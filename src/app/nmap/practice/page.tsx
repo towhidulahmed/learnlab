@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { NMAP_STUDY } from "@/lib/nmap-study-data";
 import { NMAP_QUESTIONS } from "@/lib/nmap-questions";
-import { PageFooter } from "@/components/page-footer";
 
 export default function NmapPracticePage() {
   return (
@@ -54,7 +53,6 @@ export default function NmapPracticePage() {
           </section>
         );
       })}
-      <PageFooter />
     </main>
   );
 }

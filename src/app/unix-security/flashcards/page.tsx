@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { UNIX_SECURITY_STUDY } from "@/lib/unix-security-study-data";
 import { FlashcardRunner } from "@/components/flashcard-runner";
-import { PageFooter } from "@/components/page-footer";
 
 export const dynamic = "force-static";
 
@@ -79,7 +78,6 @@ function FlashcardsContent() {
           </div>
         </section>
       ))}
-      <PageFooter />
     </div>
   );
 }

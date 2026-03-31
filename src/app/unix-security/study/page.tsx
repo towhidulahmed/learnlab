@@ -1,6 +1,5 @@
 import { UNIX_SECURITY_STUDY } from "@/lib/unix-security-study-data";
 import { LinuxStudyClient } from "@/components/linux-study-client";
-import { PageFooter } from "@/components/page-footer";
 
 export const dynamic = "force-static";
 
@@ -14,7 +13,6 @@ export default function UnixSecurityStudyPage() {
         flashcardsBasePath="/unix-security/flashcards"
         accent="blue"
       />
-      <PageFooter />
     </main>
   );
 }

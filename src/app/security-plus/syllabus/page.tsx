@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { STATIC_SYLLABUS } from "@/lib/static-syllabus";
-import { PageFooter } from "@/components/page-footer";
 
 export default function SyllabusPage() {
   return (
@@ -45,7 +44,6 @@ export default function SyllabusPage() {
           </div>
         </section>
       ))}
-      <PageFooter />
     </main>
   );
 }

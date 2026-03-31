@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { LINUX_STUDY } from "@/lib/linux-study-data";
-import { PageFooter } from "@/components/page-footer";
 
 export default function LinuxSyllabusPage() {
   return (
@@ -64,7 +63,6 @@ export default function LinuxSyllabusPage() {
           </section>
         );
       })}
-      <PageFooter />
     </main>
   );
 }
