@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
-        <div className="mx-auto min-h-dvh max-w-5xl px-0 pb-20 sm:px-6 sm:pb-6 sm:pt-6">
+        <div className="mx-auto min-h-dvh max-w-5xl px-0 sm:px-6 sm:pb-6 sm:pt-6">
           <SiteHeader />
           <CourseNavBar />
           {children}

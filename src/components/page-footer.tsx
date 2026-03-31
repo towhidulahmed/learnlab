@@ -33,7 +33,7 @@ export function PageFooter() {
           <Link
             key={link.href}
             href={link.href}
-            className="text-xs text-zinc-600 transition-colors hover:text-zinc-500 sm:text-sm"
+            className="text-xs !text-zinc-600 transition-colors hover:!text-zinc-500 sm:text-sm"
           >
             {link.label}
           </Link>
