@@ -1,23 +1,31 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
-  { label: "Home",          href: "/",               color: "hover:text-zinc-200" },
-  { label: "Security+",     href: "/security-plus",  color: "hover:text-cyan-400" },
-  { label: "Linux Admin",   href: "/linux",           color: "hover:text-emerald-400" },
-  { label: "Nmap",          href: "/nmap",            color: "hover:text-orange-400" },
-  { label: "Unix Security", href: "/unix-security",  color: "hover:text-blue-400" },
+  { label: "Home",          href: "/"               },
+  { label: "Security+",     href: "/security-plus"  },
+  { label: "Linux Admin",   href: "/linux"          },
+  { label: "Nmap",          href: "/nmap"           },
+  { label: "Unix Security", href: "/unix-security"  },
 ];
 
 export function PageFooter() {
+  const pathname = usePathname();
+
+  const isExamActive = /^\/security-plus\/mock-tests\/\d+\/?$/.test(pathname);
+  if (isExamActive) return null;
+
   return (
-    <footer className="mt-10 border-t border-zinc-800/60 pb-24 pt-6 sm:pb-8">
-      {/* Nav links */}
-      <nav className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:gap-x-6">
+    <footer className="mt-10 border-t border-zinc-800/40 px-4 pb-28 pt-6 sm:px-0 sm:pb-10">
+      {/* Nav links — 3-col grid on mobile, single row on desktop */}
+      <nav className="grid grid-cols-3 place-items-center gap-y-3 sm:flex sm:flex-row sm:justify-center sm:gap-x-8">
         {NAV_LINKS.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className={`text-sm text-zinc-500 transition-colors ${link.color}`}
+            className="text-xs text-zinc-600 transition-colors hover:text-zinc-400 sm:text-sm"
           >
             {link.label}
           </Link>
