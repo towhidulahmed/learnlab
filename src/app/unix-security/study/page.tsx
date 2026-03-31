@@ -12,6 +12,7 @@ export default function UnixSecurityStudyPage() {
         title="Unix Security Study Guide"
         backHref="/unix-security"
         flashcardsBasePath="/unix-security/flashcards"
+        accent="blue"
       />
       <PageFooter />
     </main>

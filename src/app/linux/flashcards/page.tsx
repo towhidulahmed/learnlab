@@ -29,20 +29,10 @@ function FlashcardsContent() {
     <div className="space-y-4 px-3 pt-4 sm:space-y-6 sm:px-0 sm:pt-0">
       {/* Header */}
       <section className="rounded-2xl border border-zinc-800 bg-gradient-to-br from-emerald-950/30 to-zinc-900 p-5 sm:rounded-xl sm:p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Linux Flashcards</h2>
-            <p className="mt-2 text-sm leading-6 text-zinc-400">
-              Select a topic below or study all flashcards at once.
-            </p>
-          </div>
-          <Link
-            href="/linux"
-            className="flex-shrink-0 rounded-lg bg-zinc-800 px-3 py-2 text-sm font-medium text-zinc-300 transition-colors hover:bg-zinc-700 active:bg-zinc-600"
-          >
-            ← Back
-          </Link>
-        </div>
+        <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Linux Flashcards</h2>
+        <p className="mt-2 text-sm leading-6 text-zinc-400">
+          Select a topic below or study all flashcards at once.
+        </p>
       </section>
 
       {/* All flashcards CTA */}

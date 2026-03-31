@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import type { LinuxDomain, LinuxTopic } from "@/lib/linux-study-data";
 
-function TopicCard({ topic, flashcardsBasePath }: { topic: LinuxTopic; flashcardsBasePath: string }) {
+function TopicCard({ topic, flashcardsBasePath, accent }: { topic: LinuxTopic; flashcardsBasePath: string; accent: string }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
@@ -34,7 +34,7 @@ function TopicCard({ topic, flashcardsBasePath }: { topic: LinuxTopic; flashcard
                 __html: para
                   .replace(/\\n/g, "\n")
                   .replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-100">$1</strong>')
-                  .replace(/`([^`]+)`/g, '<code class="rounded bg-zinc-700/60 px-1.5 py-0.5 text-xs text-emerald-400 font-mono">$1</code>')
+                  .replace(/`([^`]+)`/g, `<code class="rounded bg-zinc-700/60 px-1.5 py-0.5 text-xs ${ACCENT_CODE[accent] ?? ACCENT_CODE.emerald} font-mono">$1</code>`)
               }} />
             ))}
           </div>
@@ -63,7 +63,7 @@ function TopicCard({ topic, flashcardsBasePath }: { topic: LinuxTopic; flashcard
               <ul className="space-y-1.5">
                 {topic.tips.map((tip, i) => (
                   <li key={i} className="flex items-start gap-2 text-xs text-zinc-400">
-                    <span className="mt-0.5 text-emerald-500">•</span>
+                    <span className={`mt-0.5 ${ACCENT_BULLET[accent] ?? ACCENT_BULLET.emerald}`}>•</span>
                     {tip}
                   </li>
                 ))}
@@ -74,7 +74,7 @@ function TopicCard({ topic, flashcardsBasePath }: { topic: LinuxTopic; flashcard
           {/* Flashcard count link */}
           <Link
             href={`${flashcardsBasePath}?topic=${topic.slug}`}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-950/40 px-3 py-1.5 text-xs font-medium text-emerald-400 transition-colors hover:bg-emerald-950/60"
+            className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${ACCENT_CARD_LINK[accent] ?? ACCENT_CARD_LINK.emerald}`}
           >
             <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-1.007.661-1.862 1.572-2.14z" />
@@ -87,25 +87,44 @@ function TopicCard({ topic, flashcardsBasePath }: { topic: LinuxTopic; flashcard
   );
 }
 
-export function LinuxStudyClient({ domains, title = "Linux Study Guide", backHref = "/linux", flashcardsBasePath = "/linux/flashcards" }: { domains: LinuxDomain[]; title?: string; backHref?: string; flashcardsBasePath?: string }) {
+const ACCENT_GRADIENT: Record<string, string> = {
+  emerald: "from-emerald-950/30",
+  orange:  "from-orange-950/30",
+  blue:    "from-blue-950/30",
+  cyan:    "from-cyan-950/30",
+};
+
+const ACCENT_CODE: Record<string, string> = {
+  emerald: "text-emerald-400",
+  orange:  "text-orange-400",
+  blue:    "text-blue-400",
+  cyan:    "text-cyan-400",
+};
+
+const ACCENT_BULLET: Record<string, string> = {
+  emerald: "text-emerald-500",
+  orange:  "text-orange-500",
+  blue:    "text-blue-500",
+  cyan:    "text-cyan-500",
+};
+
+const ACCENT_CARD_LINK: Record<string, string> = {
+  emerald: "bg-emerald-950/40 text-emerald-400 hover:bg-emerald-950/60",
+  orange:  "bg-orange-950/40 text-orange-400 hover:bg-orange-950/60",
+  blue:    "bg-blue-950/40 text-blue-400 hover:bg-blue-950/60",
+  cyan:    "bg-cyan-950/40 text-cyan-400 hover:bg-cyan-950/60",
+};
+
+export function LinuxStudyClient({ domains, title = "Linux Study Guide", backHref = "/linux", flashcardsBasePath = "/linux/flashcards", accent = "emerald" }: { domains: LinuxDomain[]; title?: string; backHref?: string; flashcardsBasePath?: string; accent?: string }) {
+  const gradient = ACCENT_GRADIENT[accent] ?? ACCENT_GRADIENT.emerald;
   return (
     <div className="space-y-4 px-3 pt-4 sm:space-y-6 sm:px-0 sm:pt-0">
       {/* Header */}
-      <section className="rounded-2xl border border-zinc-800 bg-gradient-to-br from-emerald-950/30 to-zinc-900 p-5 sm:rounded-xl sm:p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight sm:text-2xl">{title}</h2>
-            <p className="mt-2 text-sm leading-6 text-zinc-400">
-              Expand each topic to read the guide, view key commands, and access flashcards.
-            </p>
-          </div>
-          <Link
-            href={backHref}
-            className="flex-shrink-0 rounded-lg bg-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-700"
-          >
-            ← Back
-          </Link>
-        </div>
+      <section className={`rounded-2xl border border-zinc-800 bg-gradient-to-br ${gradient} to-zinc-900 p-5 sm:rounded-xl sm:p-6`}>
+        <h2 className="text-xl font-bold tracking-tight sm:text-2xl">{title}</h2>
+        <p className="mt-2 text-sm leading-6 text-zinc-400">
+          Expand each topic to read the guide, view key commands, and access flashcards.
+        </p>
       </section>
 
       {/* Domain sections grouped by level */}
@@ -126,7 +145,7 @@ export function LinuxStudyClient({ domains, title = "Linux Study Guide", backHre
                 <h3 className="mb-3 text-base font-semibold sm:text-lg">{domain.name}</h3>
                 <div className="space-y-2">
                   {domain.topics.map((topic) => (
-                    <TopicCard key={topic.slug} topic={topic} flashcardsBasePath={flashcardsBasePath} />
+                    <TopicCard key={topic.slug} topic={topic} flashcardsBasePath={flashcardsBasePath} accent={accent} />
                   ))}
                 </div>
               </section>

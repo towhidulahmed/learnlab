@@ -8,20 +8,10 @@ export default function UnixSecurityPracticePage() {
     <main className="space-y-4 px-3 pt-4 sm:space-y-6 sm:px-0 sm:pt-0">
       {/* Header */}
       <section className="rounded-2xl border border-zinc-800 bg-gradient-to-br from-blue-950/30 to-zinc-900 p-5 sm:rounded-xl sm:p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Unix Security Practice</h2>
-            <p className="mt-2 text-sm leading-6 text-zinc-400">
-              {UNIX_SECURITY_QUESTIONS.length} multiple-choice questions across all modules. Pick a topic to begin.
-            </p>
-          </div>
-          <Link
-            href="/unix-security"
-            className="flex-shrink-0 rounded-lg bg-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-700"
-          >
-            ← Back
-          </Link>
-        </div>
+        <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Unix Security Practice</h2>
+        <p className="mt-2 text-sm leading-6 text-zinc-400">
+          {UNIX_SECURITY_QUESTIONS.length} multiple-choice questions across all modules. Pick a topic to begin.
+        </p>
       </section>
 
       {/* Domain / topic list */}

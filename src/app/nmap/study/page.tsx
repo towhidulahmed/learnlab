@@ -7,7 +7,13 @@ export const dynamic = "force-static";
 export default function NmapStudyPage() {
   return (
     <main>
-      <LinuxStudyClient domains={NMAP_STUDY} />
+      <LinuxStudyClient
+        domains={NMAP_STUDY}
+        title="Nmap Study Guide"
+        backHref="/nmap"
+        flashcardsBasePath="/nmap/flashcards"
+        accent="orange"
+      />
       <PageFooter />
     </main>
   );
