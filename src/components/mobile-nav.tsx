@@ -86,7 +86,7 @@ export function MobileNav() {
   const isFlashcards  = pathname.includes("/flashcards");
   const isPractice    = pathname.includes("/practice");
   const isSyllabus    = pathname.includes("/syllabus");
-  const isStudy       = pathname.includes("/study") || isSyllabus;
+  const isStudy       = !isFlashcards && (pathname.includes("/study") || isSyllabus);
 
   if (inSecPlus) {
     const isHome = pathname === "/security-plus" || pathname === "/security-plus/" || pathname.includes("/mock-tests");
