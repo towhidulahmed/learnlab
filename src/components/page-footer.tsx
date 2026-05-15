@@ -27,7 +27,7 @@ export function PageFooter() {
       </Link>
 
       <div className="flex items-center gap-2 text-[11px] text-zinc-600">
-        <span>© {new Date().getFullYear()} Stuick</span>
+        <span>© {new Date().getFullYear()} SecLab</span>
         <span className="text-zinc-700">·</span>
         <span className="font-mono text-zinc-700">&lt;/&gt;</span>
         <a
