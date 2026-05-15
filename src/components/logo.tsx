@@ -4,11 +4,11 @@ type LogoProps = {
 };
 
 export function Logo({ large = false, className = "" }: LogoProps) {
-  const iconSize = large ? "0.68em" : "0.78em";
+  const boltSize = large ? "0.6em" : "0.7em";
 
   return (
     <span
-      className={`inline-flex items-center gap-[0.2em] font-black tracking-tight select-none ${
+      className={`inline-flex items-baseline gap-[0.12em] font-black tracking-tight select-none ${
         large
           ? "text-4xl sm:text-5xl lg:text-6xl"
           : "text-lg sm:text-xl"
@@ -16,31 +16,31 @@ export function Logo({ large = false, className = "" }: LogoProps) {
       aria-label="SecLab 30"
       role="img"
     >
-      {/*
-        Hexagon — the dominant shape in cybersecurity:
-        network topology diagrams, SIEM dashboards, honeypot maps,
-        IEEE security research papers. A solid filled hexagon scales
-        cleanly from 14px (header) to 48px+ (hero) without detail loss.
-      */}
+      {/* Lightning bolt — old Stuick accent, carried over */}
       <svg
         aria-hidden="true"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        className="text-cyan-400 flex-shrink-0"
-        style={{ width: iconSize, height: iconSize }}
+        viewBox="0 0 7 10"
+        xmlns="http://www.w3.org/2000/svg"
+        style={{
+          fill: "#facc15",
+          width: boltSize,
+          height: boltSize,
+          alignSelf: "center",
+          flexShrink: 0,
+        }}
       >
-        <polygon points="12,2 21,7 21,17 12,22 3,17 3,7" />
+        <polygon points="5,0 0,6 3.5,6 2,10 7,4 3.5,4" />
       </svg>
 
-      {/* "Sec" — white */}
+      {/* "Sec" — heavy white */}
       <span className="text-zinc-100">Sec</span>
 
-      {/* "Lab" — cyan */}
-      <span className="text-cyan-400">Lab</span>
+      {/* "Lab" — yellow accent */}
+      <span className="text-yellow-400">Lab</span>
 
       {/* "30" — version tag superscript */}
       <span
-        className="font-bold text-zinc-500"
+        className="font-bold text-yellow-400"
         style={{
           fontSize: large ? "0.3em" : "0.5em",
           alignSelf: "flex-start",
