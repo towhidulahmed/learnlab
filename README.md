@@ -1,4 +1,4 @@
-# SecLab
+# SecLab 30
 
 A hands-on security knowledge lab. Pick a course, study the material, test yourself with flashcards and practice questions, and track how you do. No account needed, works in the browser.
 

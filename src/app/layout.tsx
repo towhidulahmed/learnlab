@@ -6,8 +6,8 @@ import { CourseNavBar } from "@/components/course-nav-bar";
 import { PageFooter } from "@/components/page-footer";
 
 export const metadata: Metadata = {
-  title: "SecLab — Security Knowledge Lab",
-  description: "Your hands-on security knowledge lab. Study Security+, Linux, Nmap, and Unix Security.",
+  title: "SecLab 30 — Security Knowledge Lab",
+  description: "Your hands-on security knowledge lab. Study Security+, Linux, Nmap, and Unix Security — SecLab 30.",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "SecLab",
+    title: "SecLab 30",
   },
 };
 

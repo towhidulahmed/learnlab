@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type Accent = "cyan" | "emerald" | "orange" | "blue";
+type Accent = "cyan" | "emerald" | "orange" | "blue" | "violet";
 
 const PILL_ACTIVE: Record<Accent, string> = {
   cyan:    "bg-zinc-700/70 text-cyan-400 border border-cyan-400/30",
   emerald: "bg-zinc-700/70 text-emerald-400 border border-emerald-400/30",
   orange:  "bg-zinc-700/70 text-orange-400 border border-orange-400/30",
   blue:    "bg-zinc-700/70 text-blue-400 border border-blue-400/30",
+  violet:  "bg-zinc-700/70 text-violet-400 border border-violet-400/30",
 };
 
 const COURSE_LABEL_COLOR: Record<Accent, string> = {
@@ -17,6 +18,7 @@ const COURSE_LABEL_COLOR: Record<Accent, string> = {
   emerald: "text-emerald-400",
   orange:  "text-orange-400",
   blue:    "text-blue-400",
+  violet:  "text-violet-400",
 };
 
 interface CourseConfig {
@@ -66,6 +68,14 @@ const COURSES: Record<string, CourseConfig> = {
       { label: "Study",      href: "/unix-security/study",      segment: "study"      },
       { label: "Flashcards", href: "/unix-security/flashcards", segment: "flashcards" },
       { label: "Practice",   href: "/unix-security/practice",   segment: "practice"   },
+    ],
+  },
+  "30-days-soc": {
+    label: "30-Day SOC",
+    accent: "violet",
+    home: "/30-days-soc",
+    tabs: [
+      { label: "Flashcards", href: "/30-days-soc/flashcards", segment: "flashcards" },
     ],
   },
 };

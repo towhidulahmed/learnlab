@@ -7,7 +7,7 @@ import type { LinuxDomain } from "@/lib/linux-study-data";
 
 type Flashcard = { front: string; back: string; topic: string };
 
-type AccentColor = "emerald" | "cyan" | "orange" | "blue";
+type AccentColor = "emerald" | "cyan" | "orange" | "blue" | "violet";
 
 const ACCENT = {
   emerald: {
@@ -17,6 +17,14 @@ const ACCENT = {
     finishIcon:  "bg-emerald-950/50",
     restartBtn:  "bg-emerald-600 hover:bg-emerald-500",
     gotItBtn:    "border-emerald-800/40 bg-emerald-950/20 text-emerald-400 active:bg-emerald-900/30",
+  },
+  violet: {
+    text:        "text-violet-400",
+    text5:       "text-violet-500",
+    progressBar: "bg-violet-600",
+    finishIcon:  "bg-violet-950/50",
+    restartBtn:  "bg-violet-600 hover:bg-violet-500",
+    gotItBtn:    "border-violet-800/40 bg-violet-950/20 text-violet-400 active:bg-violet-900/30",
   },
   cyan: {
     text:        "text-cyan-400",

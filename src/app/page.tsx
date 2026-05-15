@@ -4,6 +4,7 @@ import { DOMAIN_KEYS } from "@/lib/constants";
 import { LINUX_STUDY } from "@/lib/linux-study-data";
 import { NMAP_TOTAL_TOPICS } from "@/lib/nmap-study-data";
 import { UNIX_SECURITY_TOTAL_TOPICS } from "@/lib/unix-security-study-data";
+import { SOC_TOTAL_FLASHCARDS, SOC_TOTAL_TOPICS } from "@/lib/soc-flashcard-data";
 
 const COURSES = [
   {
@@ -82,6 +83,25 @@ const COURSES = [
       arrow: "text-blue-500/40",
     },
   },
+  {
+    href: "/30-days-soc",
+    title: "30-Day SOC Analyst",
+    subtitle: "Incident-First Bootcamp",
+    description: "Spaced-repetition flashcards from the 35-day SOC Analyst learning program.",
+    accent: "violet",
+    icon: (
+      <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 6.878V6a2.25 2.25 0 0 1 2.25-2.25h7.5A2.25 2.25 0 0 1 18 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 0 0 4.5 9v.878m13.5-3A2.25 2.25 0 0 1 19.5 9v.878m0 0a2.246 2.246 0 0 0-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0 1 21 12v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6c0-1.007.661-1.862 1.572-2.14z" />
+      </svg>
+    ),
+    tags: [`${SOC_TOTAL_TOPICS} Days`, `${SOC_TOTAL_FLASHCARDS} Cards`, "Flashcards Only"],
+    accentClasses: {
+      card: "sm:hover:border-violet-800/40",
+      iconBg: "bg-violet-950/40 text-violet-400",
+      tag: "bg-violet-950/40 text-violet-400",
+      arrow: "text-violet-500/40",
+    },
+  },
 ];
 
 export default function Home() {
@@ -95,7 +115,7 @@ export default function Home() {
         <div className="mt-8 flex flex-col items-center gap-3">
           <div className="h-px w-12 bg-gradient-to-r from-transparent via-zinc-600/60 to-transparent" />
           <p className="text-[10px] sm:text-[11px] font-medium tracking-[0.28em] uppercase text-zinc-500">
-            why study long when you can study quick
+            learn the threat. master the defense.
           </p>
         </div>
       </section>

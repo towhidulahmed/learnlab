@@ -3,13 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type Accent = "cyan" | "emerald" | "orange" | "blue";
+type Accent = "cyan" | "emerald" | "orange" | "blue" | "violet";
 
 const PILL: Record<Accent, string> = {
   cyan:    "bg-zinc-700/55 border border-cyan-400/30 shadow-lg shadow-black/50",
   emerald: "bg-zinc-700/55 border border-emerald-400/30 shadow-lg shadow-black/50",
   orange:  "bg-zinc-700/55 border border-orange-400/30 shadow-lg shadow-black/50",
   blue:    "bg-zinc-700/55 border border-blue-400/30 shadow-lg shadow-black/50",
+  violet:  "bg-zinc-700/55 border border-violet-400/30 shadow-lg shadow-black/50",
 };
 
 const ACTIVE_TEXT: Record<Accent, string> = {
@@ -17,6 +18,7 @@ const ACTIVE_TEXT: Record<Accent, string> = {
   emerald: "text-emerald-400",
   orange:  "text-orange-400",
   blue:    "text-blue-400",
+  violet:  "text-violet-400",
 };
 
 function NavItem({
@@ -80,8 +82,9 @@ export function MobileNav() {
   const inLinux       = pathname.startsWith("/linux");
   const inNmap        = pathname.startsWith("/nmap");
   const inUnixSec     = pathname.startsWith("/unix-security");
+  const inSoc         = pathname.startsWith("/30-days-soc");
 
-  if (!inSecPlus && !inLinux && !inNmap && !inUnixSec) return null;
+  if (!inSecPlus && !inLinux && !inNmap && !inUnixSec && !inSoc) return null;
 
   const isFlashcards  = pathname.includes("/flashcards");
   const isPractice    = pathname.includes("/practice");
@@ -131,6 +134,20 @@ export function MobileNav() {
           <NavItem href="/unix-security/study" label="Study" accent="blue" isActive={isStudy && !isHome} icon={<StudyIcon />} />
           <NavItem href="/unix-security/flashcards" label="Flashcards" accent="blue" isActive={isFlashcards} icon={<FlashcardsIcon />} />
           <NavItem href="/unix-security/practice" label="Practice" accent="blue" isActive={isPractice} icon={<PracticeIcon />} />
+        </div>
+      </nav>
+    );
+  }
+
+  if (inSoc) {
+    const isHome = pathname === "/30-days-soc" || pathname === "/30-days-soc/";
+    return (
+      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-[#1a2438]/70 bg-[#05060c]/97 pb-[max(0.25rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:hidden">
+        <div className="mx-auto flex max-w-lg items-stretch">
+          <NavItem href="/30-days-soc" label="30-Day SOC" accent="violet" isActive={isHome}
+            icon={<svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.8} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>}
+          />
+          <NavItem href="/30-days-soc/flashcards" label="Flashcards" accent="violet" isActive={isFlashcards} icon={<FlashcardsIcon />} />
         </div>
       </nav>
     );
